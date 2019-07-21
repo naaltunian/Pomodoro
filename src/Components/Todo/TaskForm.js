@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-const TodoForm = props => {
+const TaskForm = props => {
     return(
         <Fragment>
             { !props.state.task &&  <form onSubmit={props.handleSubmit}>
@@ -14,4 +14,4 @@ const TodoForm = props => {
     )
 }
 
-export default TodoForm;
+export default TaskForm;

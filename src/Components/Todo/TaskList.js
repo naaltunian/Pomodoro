@@ -1,7 +1,9 @@
 import React from 'react';
-import TodoForm from './TodoForm';
+import TaskForm from './TaskForm';
+import SubTask from './SubTask';
+import "./Task.css";
 
-class TodoList extends React.Component {
+class TaskList extends React.Component {
 
     state = {
         taskInput: "",
@@ -24,7 +26,7 @@ class TodoList extends React.Component {
       handleSubTaskSubmit = e => {
           e.preventDefault();
           const { subTasks, subTaskInput } = this.state;
-          const updatedSubTasks = [...subTasks, subTaskInput]
+          const updatedSubTasks = [...subTasks, subTaskInput];
           this.setState({
               subTasks: updatedSubTasks,
               subTaskInput: ""
@@ -40,15 +42,14 @@ class TodoList extends React.Component {
     render() {
         return(
             <div>
-                <TodoForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleSubTaskSubmit={this.handleSubTaskSubmit} />
-                { this.state.task && <h2>Task:</h2>}
-                { this.state.task && <p>{this.state.task}</p> }
+                <TaskForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleSubTaskSubmit={this.handleSubTaskSubmit} />
+                { this.state.task && <h2><strong>Task:</strong> {this.state.task}</h2>}
                 { this.state.subTasks && this.state.subTasks.map((subTask, index) => {
-                    return <p key={index}>{subTask}</p>
+                    return <SubTask key={index} subTask={subTask}/>
                 })}
             </div>
         )
     }
 }
 
-export default TodoList;
+export default TaskList;
