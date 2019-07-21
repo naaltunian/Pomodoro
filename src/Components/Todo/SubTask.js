@@ -14,7 +14,7 @@ class SubTask extends React.Component {
     render() {
         return(
             <Fragment>
-                <p className={this.state.strikeThrough && "strike"} onClick={this.lineThrough}>{this.props.subTask}</p>
+                <p className={this.state.strikeThrough ? "strike": undefined} onClick={this.lineThrough}>{this.props.subTask}</p>
             </Fragment>
         )
     }
