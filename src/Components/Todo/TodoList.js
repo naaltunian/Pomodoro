@@ -5,7 +5,7 @@ class TodoList extends React.Component {
 
     state = {
         taskInput: "",
-        subTasksInput: "",
+        subTaskInput: "",
         task: "",
         subTasks: []
       }
@@ -20,6 +20,17 @@ class TodoList extends React.Component {
         });
         console.log(this.state);
       }
+
+      handleSubTaskSubmit = e => {
+          e.preventDefault();
+          const { subTasks, subTaskInput } = this.state;
+          const updatedSubTasks = [...subTasks, subTaskInput]
+          this.setState({
+              subTasks: updatedSubTasks,
+              subTaskInput: ""
+          });
+          console.log(this.state);
+      }
     
       handleChange = e => {
         const { name, value } = e.target;
@@ -29,8 +40,12 @@ class TodoList extends React.Component {
     render() {
         return(
             <div>
-                <TodoForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-                <p>{this.state.task}</p>
+                <TodoForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleSubTaskSubmit={this.handleSubTaskSubmit} />
+                { this.state.task && <h2>Task:</h2>}
+                { this.state.task && <p>{this.state.task}</p> }
+                { this.state.subTasks && this.state.subTasks.map((subTask, index) => {
+                    return <p key={index}>{subTask}</p>
+                })}
             </div>
         )
     }
