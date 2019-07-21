@@ -9,7 +9,8 @@ class TaskList extends React.Component {
         taskInput: "",
         subTaskInput: "",
         task: "",
-        subTasks: []
+        subTasks: [],
+        taskId: 0
       }
     
       handleSubmit = e => {
@@ -39,13 +40,18 @@ class TaskList extends React.Component {
         this.setState({ [name]: value });
     }
 
+    deleteSubTask = taskId => {
+       const id = this.state.subTasks.filter((task, taskIndex) => taskIndex !== taskId);
+       this.setState({ subTasks: id });
+    }
+
     render() {
         return(
             <div>
                 <TaskForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleSubTaskSubmit={this.handleSubTaskSubmit} />
                 { this.state.task && <h2><strong>Task:</strong> {this.state.task}</h2>}
                 { this.state.subTasks && this.state.subTasks.map((subTask, index) => {
-                    return <SubTask key={index} subTask={subTask}/>
+                    return <SubTask id={index} key={index} subTask={subTask} delete={this.deleteSubTask} />
                 })}
             </div>
         )

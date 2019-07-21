@@ -7,14 +7,16 @@ class SubTask extends React.Component {
     }
 
     lineThrough = _ => {
-        console.log("click")
         this.setState({strikeThrough: !this.state.strikeThrough})
     }
 
     render() {
         return(
             <Fragment>
-                <p className={this.state.strikeThrough ? "strike": undefined} onClick={this.lineThrough}>{this.props.subTask}</p>
+                <span className="subTask">
+                    <p className={this.state.strikeThrough ? "strike": undefined} onClick={this.lineThrough}>{this.props.subTask}</p>
+                    <p onClick={() => this.props.delete(this.props.id)}>X</p>
+                </span>
             </Fragment>
         )
     }
