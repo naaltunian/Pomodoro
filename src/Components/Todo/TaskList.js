@@ -9,11 +9,13 @@ class TaskList extends React.Component {
         taskInput: "",
         subTaskInput: "",
         task: "",
-        subTasks: []
+        subTasks: [],
+        taskId: 0
       }
     
       handleSubmit = e => {
         e.preventDefault();
+        if(!this.state.taskInput) return;
         // const todo = this.state.taskInput;
         console.log("todostate:" + this.state.taskInput);
         this.setState({
@@ -25,6 +27,7 @@ class TaskList extends React.Component {
 
       handleSubTaskSubmit = e => {
           e.preventDefault();
+          if(!this.state.subTaskInput) return;
           const { subTasks, subTaskInput } = this.state;
           const updatedSubTasks = [...subTasks, subTaskInput];
           this.setState({
@@ -39,13 +42,18 @@ class TaskList extends React.Component {
         this.setState({ [name]: value });
     }
 
+    deleteSubTask = taskId => {
+       const id = this.state.subTasks.filter((task, taskIndex) => taskIndex !== taskId);
+       this.setState({ subTasks: id });
+    }
+
     render() {
         return(
-            <div>
+            <div className="task-form">
                 <TaskForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleSubTaskSubmit={this.handleSubTaskSubmit} />
                 { this.state.task && <h2><strong>Task:</strong> {this.state.task}</h2>}
                 { this.state.subTasks && this.state.subTasks.map((subTask, index) => {
-                    return <SubTask key={index} subTask={subTask}/>
+                    return <SubTask id={index} key={index} subTask={subTask} delete={this.deleteSubTask} />
                 })}
             </div>
         )
