@@ -49,8 +49,8 @@ class TaskList extends React.Component {
 
     render() {
         return(
-            <div>
-                <TaskForm className="task-form" state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleSubTaskSubmit={this.handleSubTaskSubmit} />
+            <div className="task-form">
+                <TaskForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleSubTaskSubmit={this.handleSubTaskSubmit} />
                 { this.state.task && <h2><strong>Task:</strong> {this.state.task}</h2>}
                 { this.state.subTasks && this.state.subTasks.map((subTask, index) => {
                     return <SubTask id={index} key={index} subTask={subTask} delete={this.deleteSubTask} />
