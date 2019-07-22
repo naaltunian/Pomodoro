@@ -2,6 +2,20 @@
     text-decoration: line-through;
 }
 
-.subTask {
+.task-form {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 10px solid black;
+}
+
+.sub-task {
+    display: flex;
+    border: 1px solid black;
+    width: 3rem;
+    justify-content: space-around;
+}
+
+.delete-btn {
+    color: red;
 }
