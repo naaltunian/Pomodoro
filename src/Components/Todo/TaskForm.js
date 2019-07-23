@@ -4,7 +4,7 @@ const TaskForm = props => {
     return(
         <Fragment>
             { !props.state.task &&
-                <form onSubmit={props.handleSubmit}>
+                <form className="push-down" onSubmit={props.handleSubmit}>
                     <input type="text" value={props.state.taskInput} name="taskInput" placeholder="Enter task here" onChange={props.handleChange} />
                 </form>
             }

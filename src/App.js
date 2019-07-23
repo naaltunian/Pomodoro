@@ -1,6 +1,6 @@
 import React from 'react';
 import TaskList from './Components/Todo/TaskList';
-// import "./Components/Todo/Task.css";
+import Pomodoro from './Components/Pomodoro/Pomodoro';
 
 class App extends React.Component {
 
@@ -8,6 +8,7 @@ class App extends React.Component {
     return(
       <div>
         <TaskList />
+        <Pomodoro />
       </div>
     )
   }
