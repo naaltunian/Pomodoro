@@ -9,7 +9,7 @@ class Pomodoro extends React.Component {
         minutes: 25,
         seconds: 0,
         breakTimeMin: 5,
-        start: false,
+        start: false
     }
 
     resetTime = () => {
@@ -44,6 +44,7 @@ class Pomodoro extends React.Component {
     // ring = () => {
     //     if (this.state.minutes === 0 && this.state.seconds === 0) {
     //         // sound the alarm
+    //          set break to true
     //     }
     // }
 
