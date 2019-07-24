@@ -13,8 +13,13 @@ class Pomodoro extends React.Component {
 
     }
 
-    secondTick = () => {
-        this.setState({ seconds: this.state.seconds === 0 ? 59 : this.state.seconds - 1 });
+    resetTime = () => {
+        this.setState({
+            minutes: 25,
+            seconds: 0,
+            breakTimeMin: 5,
+            start: false
+        })
     }
 
     incrementMinTimer = () => {
@@ -28,13 +33,30 @@ class Pomodoro extends React.Component {
     }
 
     decrementMinTimer = () => {
+        if(this.state.minutes === 0) return;
         const updatedMin = this.state.minutes - 1;
         this.setState({ minutes: updatedMin});
     }
 
     decrementSecTimer = () => {
+        if(this.state.seconds === 0) return;
         const updatedSec = this.state.seconds - 1;
         this.setState({ seconds: updatedSec});
+    }
+
+    startTimer = () => {
+        this.setState({
+            start: true,
+        })
+    }
+
+    // minTick = () => {
+    //     if(thi)
+    //     this.setState({})
+    // }
+
+    secondTick = () => {
+        this.setState({ seconds: this.state.seconds === 0 ? 59 : this.state.seconds - 1 });
     }
 
     // ring = () => {
@@ -49,13 +71,20 @@ class Pomodoro extends React.Component {
         return(
             <div>
                 <Logo />
-                <Timer minutes={minutes} seconds={seconds} breakTimeMin={breakTimeMin} start={start} />
-                <TimeController minutes={minutes}
+                <Timer
+                    minutes={minutes}
+                    seconds={seconds}
+                    breakTimeMin={breakTimeMin}
+                    start={start}
+                />
+                <TimeController
+                    minutes={minutes}
                     seconds={seconds}
                     addMin={this.incrementMinTimer}
                     addSec={this.incrementSecTimer}
                     subMin={this.decrementMinTimer}
                     subSec={this.decrementSecTimer}
+                    reset={this.resetTime}
                 />
             </div>
         )
