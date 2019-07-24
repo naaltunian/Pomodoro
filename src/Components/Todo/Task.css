@@ -8,6 +8,10 @@
     align-items: center;
 }
 
+.push-down {
+    margin-top: 1rem;
+}
+
 .sub-task {
     display: flex;
     border: 1px solid black;
