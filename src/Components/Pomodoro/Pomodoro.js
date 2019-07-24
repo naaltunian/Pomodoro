@@ -21,29 +21,12 @@ class Pomodoro extends React.Component {
         })
     }
 
-    incrementMinTimer = () => {
-        const updatedMin = this.state.minutes + 1;
-        this.setState({ minutes: updatedMin });
-    }
-
-    incrementSecTimer = () => {
-        const updatedSec = this.state.seconds + 1;
-        this.setState({ seconds: updatedSec});
-    }
-
-    decrementMinTimer = () => {
-        if(this.state.minutes === 0) return;
-        const updatedMin = this.state.minutes - 1;
-        this.setState({ minutes: updatedMin});
-    }
-
-    decrementSecTimer = () => {
-        if(this.state.seconds === 0) return;
-        const updatedSec = this.state.seconds - 1;
-        this.setState({ seconds: updatedSec});
+    setTime = () => {
+        this.setState({ start: !this.state.start })
     }
 
     startTimer = () => {
+        // const updatedSec = this.state.seconds === 0 ? 59 : this.state.seconds - 1;
         this.setState({
             start: true,
         })
@@ -64,6 +47,27 @@ class Pomodoro extends React.Component {
     //     }
     // }
 
+    incrementMinTimer = () => {
+        const updatedMin = this.state.minutes + 1;
+        this.setState({ minutes: updatedMin });
+    }
+
+    incrementSecTimer = () => {
+        const updatedSec = this.state.seconds === 59 ? 0 : this.state.seconds + 1;
+        this.setState({ seconds: updatedSec});
+    }
+
+    decrementMinTimer = () => {
+        if(this.state.minutes === 0) return;
+        const updatedMin = this.state.minutes - 1;
+        this.setState({ minutes: updatedMin});
+    }
+
+    decrementSecTimer = () => {
+        const updatedSec = this.state.seconds === 0 ? 59 : this.state.seconds - 1
+        this.setState({ seconds: updatedSec});
+    }
+
     render() {
         const { minutes, seconds, breakTimeMin, start } = this.state
 
@@ -74,7 +78,6 @@ class Pomodoro extends React.Component {
                     minutes={minutes}
                     seconds={seconds}
                     breakTimeMin={breakTimeMin}
-                    start={start}
                 />
                 <TimeController
                     minutes={minutes}
@@ -84,6 +87,8 @@ class Pomodoro extends React.Component {
                     subMin={this.decrementMinTimer}
                     subSec={this.decrementSecTimer}
                     reset={this.resetTime}
+                    setTime={this.setTime}
+                    start={start}
                 />
             </div>
         )

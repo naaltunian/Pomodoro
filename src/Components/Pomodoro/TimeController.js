@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-const TimeController = ({ seconds, minutes, addMin, addSec, subMin, subSec, reset }) => {
+const TimeController = ({ seconds, minutes, addMin, addSec, subMin, subSec, reset, start, setTime }) => {
     return(
         <Fragment>
             <button onClick={subMin}>-</button>
@@ -10,7 +10,7 @@ const TimeController = ({ seconds, minutes, addMin, addSec, subMin, subSec, rese
             {seconds}
             <button onClick={addSec}>+</button>
             <br/>
-            <button>Start</button>
+            { start ? <button onClick={setTime}>Pause</button> : <button onClick={setTime}>Start</button>}
             <button onClick={reset}>Reset</button>
         </Fragment>
     )
