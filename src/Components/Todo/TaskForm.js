@@ -11,7 +11,7 @@ const TaskForm = props => {
             
             { props.state.task &&
                 <form onSubmit={props.handleSubTaskSubmit}>
-                    <input type="text" value={props.state.subTaskInput} name="subTaskInput" placeholder="Enter sub task here" onChange={props.handleChange} />
+                    <input disabled={props.state.subTasks.length === 3 ? "true" : ""} type="text" value={props.state.subTaskInput} name="subTaskInput" placeholder="Enter sub task here" onChange={props.handleChange} />
                 </form>
             }
         </Fragment>

@@ -10,7 +10,6 @@ class Pomodoro extends React.Component {
         seconds: 0,
         breakTimeMin: 5,
         start: false,
-
     }
 
     resetTime = () => {
