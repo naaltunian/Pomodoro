@@ -21,32 +21,27 @@ class Pomodoro extends React.Component {
         })
     }
 
-    setTime = () => {
-        this.setState({ start: !this.state.start })
-    }
-
     startTimer = () => {
-        // const updatedSec = this.state.seconds === 0 ? 59 : this.state.seconds - 1;
-        this.setState({
-            start: true,
-        })
+        this.setState({ start: true });
+        console.log('start timer')
+        this.tickDown()
     }
 
-    // minTick = () => {
-    //     if(thi)
-    //     this.setState({})
-    // }
-
-    secondTick = () => {
-        this.setState({ seconds: this.state.seconds === 0 ? 59 : this.state.seconds - 1 });
+    tickDown = () => {
+        this.interval = setInterval(() => {
+            const updatedSec = this.state.seconds - 1;
+            console.log("tick");
+            this.setState({
+                seconds: updatedSec
+            });
+        }, 1000)
     }
 
-    // ring = () => {
-    //     if (this.state.minutes === 0 && this.state.seconds === 0) {
-    //         // sound the alarm
-    //          set break to true
-    //     }
-    // }
+    stopTimer = () => {
+        console.log('stop timer')
+        this.setState({ start: false });
+        clearInterval(this.interval)
+    }
 
     incrementMinTimer = () => {
         const updatedMin = this.state.minutes + 1;
@@ -54,7 +49,7 @@ class Pomodoro extends React.Component {
     }
 
     incrementSecTimer = () => {
-        const updatedSec = this.state.seconds === 59 ? 0 : this.state.seconds + 1;
+        const updatedSec = this.state.seconds === 55 ? 0 : this.state.seconds + 5;
         this.setState({ seconds: updatedSec});
     }
 
@@ -65,7 +60,7 @@ class Pomodoro extends React.Component {
     }
 
     decrementSecTimer = () => {
-        const updatedSec = this.state.seconds === 0 ? 59 : this.state.seconds - 1
+        const updatedSec = this.state.seconds === 0 ? 55 : this.state.seconds - 5;
         this.setState({ seconds: updatedSec});
     }
 
@@ -88,7 +83,8 @@ class Pomodoro extends React.Component {
                     subMin={this.decrementMinTimer}
                     subSec={this.decrementSecTimer}
                     reset={this.resetTime}
-                    setTime={this.setTime}
+                    startTimer={this.startTimer}
+                    stopTimer={this.stopTimer}
                     start={start}
                 />
             </div>
