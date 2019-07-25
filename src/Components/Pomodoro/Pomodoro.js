@@ -29,18 +29,34 @@ class Pomodoro extends React.Component {
 
     tickDown = () => {
         this.interval = setInterval(() => {
-            const updatedSec = this.state.seconds - 1;
+            const updatedSec = this.state.seconds === 0 ? 59 : this.state.seconds - 1;
+            const updatedMin = this.state.seconds === 0 ? this.state.minutes - 1 : this.state.minutes;
             console.log("tick");
             this.setState({
-                seconds: updatedSec
+                seconds: updatedSec,
+                minutes: updatedMin
             });
-        }, 1000)
+            this.ring();
+        }, 1000);
     }
 
     stopTimer = () => {
-        console.log('stop timer')
+        console.log('stop timer');
         this.setState({ start: false });
         clearInterval(this.interval)
+    }
+
+    ring = () => {
+        if(this.state.minutes === 0 && this.state.seconds === 0) {
+            clearInterval(this.interval);
+            console.log("done");
+            this.setState({
+                break: true,
+                start: false,
+                seconds: 0,
+                minutes: 5
+            });
+        }
     }
 
     incrementMinTimer = () => {
@@ -49,7 +65,7 @@ class Pomodoro extends React.Component {
     }
 
     incrementSecTimer = () => {
-        const updatedSec = this.state.seconds === 55 ? 0 : this.state.seconds + 5;
+        const updatedSec = this.state.seconds >= 55 ? 0 : this.state.seconds + 5;
         this.setState({ seconds: updatedSec});
     }
 
@@ -60,7 +76,7 @@ class Pomodoro extends React.Component {
     }
 
     decrementSecTimer = () => {
-        const updatedSec = this.state.seconds === 0 ? 55 : this.state.seconds - 5;
+        const updatedSec = this.state.seconds >= 0 && this.state.seconds <= 5 ? 0 : this.state.seconds - 5;
         this.setState({ seconds: updatedSec});
     }
 
