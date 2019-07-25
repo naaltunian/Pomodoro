@@ -9,7 +9,9 @@ class Pomodoro extends React.Component {
         minutes: 25,
         seconds: 0,
         breakTimeMin: 5,
-        start: false
+        start: false,
+        break: false,
+        breakCount: 0,
     }
 
     resetTime = () => {
@@ -54,7 +56,8 @@ class Pomodoro extends React.Component {
                 break: true,
                 start: false,
                 seconds: 0,
-                minutes: 5
+                minutes: 5,
+                breakCount: this.state.breakCount + 1
             });
         }
     }
