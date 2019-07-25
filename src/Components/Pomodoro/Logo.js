@@ -1,9 +1,9 @@
 import React from 'react';
-import Pom from './assets/pomodoro.png';
+import Pomodoro from './assets/pomodoro.png';
 
 const Logo = () => {
     return(
-        <img src={Pom} alt="tomato" height="250px" />
+        <img src={Pomodoro} alt="tomato" height="250px" />
     )
 }
 

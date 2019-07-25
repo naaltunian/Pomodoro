@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 
-const TimeController = ({ seconds, minutes, addMin, addSec, subMin, subSec, reset }) => {
+const TimeController = ({ addMin, addSec, subMin, subSec, reset, start, startTimer, stopTimer }) => {
     return(
         <Fragment>
-            <button onClick={subMin}>-</button>
-            {minutes}
-            <button onClick={addMin}>+</button>
-            <button onClick={subSec}>-</button>
-            {seconds}
-            <button onClick={addSec}>+</button>
+            <button disabled={start && true} onClick={subMin}>-</button>
+            Minutes
+            <button disabled={start && true} onClick={addMin}>+</button>
+            <button disabled={start && true} onClick={subSec}>-</button>
+            Seconds
+            <button disabled={start && true} onClick={addSec}>+</button>
             <br/>
-            <button>Start</button>
-            <button onClick={reset}>Reset</button>
+            { start ? <button onClick={stopTimer}>Pause</button> : <button onClick={startTimer}>Start</button>}
+            <button disabled={start && true} onClick={reset}>Reset</button>
         </Fragment>
     )
 }
