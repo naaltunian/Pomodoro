@@ -10,8 +10,7 @@ class TaskList extends React.Component {
         subTaskInput: "",
         task: "",
         subTasks: [],
-        taskId: 0,
-        disabledInput: false
+        taskId: 0
     }
     
     handleSubmit = e => {
