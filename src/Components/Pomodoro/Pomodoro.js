@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from './Logo';
 import Timer from './Timer';
 import TimeController from './TimeController';
+import Beep from './assets/beep-06.mp3';
 
 class Pomodoro extends React.Component {
 
@@ -48,6 +49,8 @@ class Pomodoro extends React.Component {
     ring = () => {
         if(this.state.minutes === 0 && this.state.seconds === 0) {
             // make noise function
+            const alarm = new Audio(Beep);
+            alarm.play();
             clearInterval(this.interval);
             const { isBreak, breakCount, start } = this.state;
             const setBreak = !isBreak;
