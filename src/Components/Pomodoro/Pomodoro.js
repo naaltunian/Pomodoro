@@ -20,8 +20,10 @@ class Pomodoro extends React.Component {
             minutes: 25,
             seconds: 0,
             breakTimeMin: 5,
-            start: false
-        })
+            start: false,
+            isBreak: false,
+            breakCount: 0
+        });
     }
 
     startTimer = () => {
