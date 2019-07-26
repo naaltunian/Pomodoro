@@ -9,7 +9,9 @@ class Pomodoro extends React.Component {
         minutes: 25,
         seconds: 0,
         breakTimeMin: 5,
-        start: false
+        start: false,
+        isBreak: false,
+        breakCount: 0
     }
 
     resetTime = () => {
@@ -23,7 +25,6 @@ class Pomodoro extends React.Component {
 
     startTimer = () => {
         this.setState({ start: true });
-        console.log('start timer')
         this.tickDown()
     }
 
@@ -31,7 +32,6 @@ class Pomodoro extends React.Component {
         this.interval = setInterval(() => {
             const updatedSec = this.state.seconds === 0 ? 59 : this.state.seconds - 1;
             const updatedMin = this.state.seconds === 0 ? this.state.minutes - 1 : this.state.minutes;
-            console.log("tick");
             this.setState({
                 seconds: updatedSec,
                 minutes: updatedMin
@@ -41,22 +41,37 @@ class Pomodoro extends React.Component {
     }
 
     stopTimer = () => {
-        console.log('stop timer');
         this.setState({ start: false });
         clearInterval(this.interval)
     }
 
     ring = () => {
         if(this.state.minutes === 0 && this.state.seconds === 0) {
+            // make noise function
             clearInterval(this.interval);
-            console.log("done");
+            const { isBreak, breakCount, start } = this.state;
+            const setBreak = !isBreak;
+            const longerBreak = breakCount === 5 ? true : false;
+            const newTime = !isBreak ? 5 : 25;
+            if(longerBreak) {
+                this.setState({
+                    break: true,
+                    start: false,
+                    seconds: 0,
+                    minutes: 20,
+                    breakCount: 0
+                });
+                return;
+            }
             this.setState({
-                break: true,
-                start: false,
+                break: setBreak,
+                start: !start,
                 seconds: 0,
-                minutes: 5
+                minutes: newTime,
+                breakCount: breakCount + 1,
             });
         }
+        return;
     }
 
     incrementMinTimer = () => {
@@ -81,7 +96,7 @@ class Pomodoro extends React.Component {
     }
 
     render() {
-        const { minutes, seconds, breakTimeMin, start } = this.state
+        const { minutes, seconds, isBreak, breakTimeMin, start } = this.state
 
         return(
             <div>
@@ -103,6 +118,7 @@ class Pomodoro extends React.Component {
                     stopTimer={this.stopTimer}
                     start={start}
                 />
+                {isBreak ? <p>Take a break :)</p> : <p>Be productive :)</p>}
             </div>
         )
     }
