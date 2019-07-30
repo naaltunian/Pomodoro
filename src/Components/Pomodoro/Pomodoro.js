@@ -69,7 +69,7 @@ class Pomodoro extends React.Component {
                 return;
             }
             this.setState({
-                break: setBreak,
+                isBreak: setBreak,
                 start: !start,
                 seconds: 0,
                 minutes: newTime,
@@ -96,13 +96,21 @@ class Pomodoro extends React.Component {
     }
 
     decrementSecTimer = () => {
-        const updatedSec = this.state.seconds >= 0 && this.state.seconds <= 5 ? 0 : this.state.seconds - 5;
+        // const updatedSec = this.state.seconds >= 0 && this.state.seconds <= 5 ? 0 : this.state.seconds - 5;
+        const { seconds } = this.state;
+        let updatedSec;
+        if(seconds > 0 && seconds <=5) {
+            updatedSec = 0;
+        } else if(seconds === 0) {
+            updatedSec = 55;
+        } else {
+            updatedSec = seconds - 5;
+        }
         this.setState({ seconds: updatedSec});
     }
 
     render() {
-        const { minutes, seconds, isBreak, breakTimeMin, start } = this.state
-
+        const { minutes, seconds, isBreak, breakTimeMin, start } = this.state;
         return(
             <div>
                 <Logo />
