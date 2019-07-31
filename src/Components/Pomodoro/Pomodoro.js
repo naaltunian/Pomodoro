@@ -3,6 +3,7 @@ import Logo from './Logo';
 import Timer from './Timer';
 import TimeController from './TimeController';
 import Beep from './assets/beep-06.mp3';
+import './Pomodoro.css';
 
 class Pomodoro extends React.Component {
 
@@ -69,7 +70,7 @@ class Pomodoro extends React.Component {
                 return;
             }
             this.setState({
-                break: setBreak,
+                isBreak: setBreak,
                 start: !start,
                 seconds: 0,
                 minutes: newTime,
@@ -96,15 +97,23 @@ class Pomodoro extends React.Component {
     }
 
     decrementSecTimer = () => {
-        const updatedSec = this.state.seconds >= 0 && this.state.seconds <= 5 ? 0 : this.state.seconds - 5;
+        // const updatedSec = this.state.seconds >= 0 && this.state.seconds <= 5 ? 0 : this.state.seconds - 5;
+        const { seconds } = this.state;
+        let updatedSec;
+        if(seconds > 0 && seconds <=5) {
+            updatedSec = 0;
+        } else if(seconds === 0) {
+            updatedSec = 55;
+        } else {
+            updatedSec = seconds - 5;
+        }
         this.setState({ seconds: updatedSec});
     }
 
     render() {
-        const { minutes, seconds, isBreak, breakTimeMin, start } = this.state
-
+        const { minutes, seconds, isBreak, breakTimeMin, start } = this.state;
         return(
-            <div>
+            <div className="pom-container">
                 <Logo />
                 <Timer
                     minutes={minutes}
@@ -123,7 +132,7 @@ class Pomodoro extends React.Component {
                     stopTimer={this.stopTimer}
                     start={start}
                 />
-                {isBreak ? <p>Take a break :)</p> : <p>Be productive :)</p>}
+                {isBreak ? <p className="break">Take a break :)</p> : <p className="break">Be productive :)</p>}
             </div>
         )
     }
