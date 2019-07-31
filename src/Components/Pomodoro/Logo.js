@@ -1,9 +1,12 @@
 import React from 'react';
 import Pomodoro from './assets/pomodoro.png';
+import './Pomodoro.css';
 
 const Logo = () => {
     return(
-        <img src={Pomodoro} alt="tomato" height="250px" />
+        <div className="logo">
+            <img src={Pomodoro} alt="tomato" height="250px" />
+        </div>
     )
 }
 

@@ -3,6 +3,7 @@ import Logo from './Logo';
 import Timer from './Timer';
 import TimeController from './TimeController';
 import Beep from './assets/beep-06.mp3';
+import './Pomodoro.css';
 
 class Pomodoro extends React.Component {
 
@@ -112,7 +113,7 @@ class Pomodoro extends React.Component {
     render() {
         const { minutes, seconds, isBreak, breakTimeMin, start } = this.state;
         return(
-            <div>
+            <div className="pom-container">
                 <Logo />
                 <Timer
                     minutes={minutes}
@@ -131,7 +132,7 @@ class Pomodoro extends React.Component {
                     stopTimer={this.stopTimer}
                     start={start}
                 />
-                {isBreak ? <p>Take a break :)</p> : <p>Be productive :)</p>}
+                {isBreak ? <p className="break">Take a break :)</p> : <p className="break">Be productive :)</p>}
             </div>
         )
     }

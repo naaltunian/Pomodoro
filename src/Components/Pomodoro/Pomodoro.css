@@ -1,0 +1,25 @@
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+.timer-container {
+    display: flex;
+    justify-content: center;
+}
+
+.time-controller-settings {
+    display: flex;
+    justify-content: center;
+}
+
+.time-controller-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.break {
+    display: flex;
+    justify-content: center;
+}
+
