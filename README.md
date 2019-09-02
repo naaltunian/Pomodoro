@@ -11,6 +11,7 @@ Clone the repository and run, ```yarn``` in the root directory to install the de
 ### Future Additions
 
 - Further styling the application
+- Refactor the application to use hook and context
 
 ---
 
